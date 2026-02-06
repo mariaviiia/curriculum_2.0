@@ -1,0 +1,103 @@
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e6f1ff;
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+  }
+  &-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  &-logo {
+    width: 400px;
+    height: 400px;
+  }
+
+  &-intro {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 8px;
+  }
+
+  &-name {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  &-name span {
+    color: #00e5ff;
+  }
+
+  &-role {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 600;
+    margin: 12px 0 24px;
+  }
+
+  &-role span {
+    color: #00e5ff;
+  }
+
+  &-description {
+    max-width: 520px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #cbd5f5;
+    margin-bottom: 40px;
+  }
+
+  &-description strong {
+    color: #00e5ff;
+  }
+
+  &-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #00e5ff, #00bcd4);
+  color: #020617;
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 229, 255, 0.35);
+}
+
+.btn.secondary {
+  border: 1px solid #00e5ff;
+  color: #00e5ff;
+}
+
+.btn.secondary:hover {
+  background: rgba(0, 229, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .hero-description {
+    font-size: 1rem;
+  }
+}
