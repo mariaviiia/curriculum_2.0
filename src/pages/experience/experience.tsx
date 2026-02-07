@@ -10,15 +10,15 @@ export interface ProjectExperience {
 
 const projects: ProjectExperience[] = [
   {
-    title: "Campus - internal learning platform",
-    period: "2019 – 2020",
+    title: "Copa airlines",
+    period: "2021 – 2025",
     description: [
-      "Contributed to the development and design of an internal learning platform, creating and structuring interactive courses for employees.",
-      "Worked with a CMS to build and integrate courses into the platform, collaborating closely with designers, managers, and teachers to deliver a high-quality and user-friendly learning experience.",
+      "Developed new features to improve and optimize the online check-in process, focusing on usability, performance, and user experience.",
+      "Actively participated in technical and design decisions, working closely with the client and maintaining clear communication with designers, product managers, and developers.",
     ],
-
-    tech: ["React", "JavaScript", "CSS", "OpenEdx"],
+    tech: ["React", "TypeScript", "SASS"],
   },
+
   {
     title: "Lever",
     period: "2020 – 2021",
@@ -29,13 +29,14 @@ const projects: ProjectExperience[] = [
     tech: ["React", "CSS", "PostgreSQL"],
   },
   {
-    title: "Copa airlines",
-    period: "2021 – 2025",
+    title: "Campus - internal learning platform",
+    period: "2019 – 2020",
     description: [
-      "Developed new features to improve and optimize the online check-in process, focusing on usability, performance, and user experience.",
-      "Actively participated in technical and design decisions, working closely with the client and maintaining clear communication with designers, product managers, and developers.",
+      "Contributed to the development and design of an internal learning platform, creating and structuring interactive courses for employees.",
+      "Worked with a CMS to build and integrate courses into the platform, collaborating closely with designers, managers, and teachers to deliver a high-quality and user-friendly learning experience.",
     ],
-    tech: ["React", "TypeScript", "SASS"],
+
+    tech: ["React", "JavaScript", "CSS", "OpenEdx"],
   },
 ];
 
