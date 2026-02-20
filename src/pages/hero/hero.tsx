@@ -8,11 +8,12 @@ interface HeroProps {
 }
 
 export const Hero = ({ preview = false, onClick }: HeroProps) => {
+  const isMobile = window.innerWidth < 1000;
   return (
     <section className="hero" onClick={onClick}>
       <div className="container">
         <div className="hero-container">
-          <img src={Logo} alt="Logo" className="hero-logo" />
+          {isMobile ? null : <img src={Logo} alt="Logo" className="hero-logo" />}
           <div className="hero-content">
             <p className="hero-intro">Hi, I’m</p>
 

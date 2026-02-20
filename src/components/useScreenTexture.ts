@@ -3,66 +3,56 @@ import { useMemo } from "react";
 
 export function useScreenTexture() {
   const texture = useMemo(() => {
-    const dpr = window.devicePixelRatio || 1;
-    const W = 1000;
-    const H = 1650;
+    const SCREEN_ASPECT = 1.5122;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
 
+    const H = 900;
+    const W = Math.round(H * SCREEN_ASPECT);
 
-    // ===== CANVAS =====
     const canvas = document.createElement("canvas");
     canvas.width = W * dpr;
     canvas.height = H * dpr;
-    canvas.style.width = `${W}px`;
-    canvas.style.height = `${H}px`;
 
     const ctx = canvas.getContext("2d")!;
     ctx.scale(dpr, dpr);
 
-    // ===== LOGO IMAGE =====
+    const texture = new THREE.CanvasTexture(canvas);
+
+    texture.flipY = true;
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.anisotropy = 4;
+    texture.generateMipmaps = false;
+    texture.minFilter = THREE.LinearFilter;
+
+    texture.needsUpdate = true;
+
     const logo = new Image();
-    logo.src = "/preview.png"; // ⚠️ must be in /public
+    logo.src = "/preview.jpg";
 
     logo.onload = () => {
-        ctx.clearRect(0, 0, W, H);
+      ctx.clearRect(0, 0, W, H);
 
-        // Background
-        ctx.fillStyle = "#1e1e1eff";
-        ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#1e1e1e";
+      ctx.fillRect(0, 0, W, H);
 
-        // Logo
-        const logoSize = 500;
-        ctx.drawImage(
-            logo,
-            W / 3.25 - logoSize / 2.5,
-            H / 6 - logoSize / 3 - 5,
-            logoSize,
-            logoSize
-        );
+      const scale = Math.max(W / logo.width, H / logo.height);
 
-  // Text
-  ctx.textAlign = "center";
-  ctx.textBaseline = "top";
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "28px Inter, system-ui";
-  ctx.fillText("Click me", W / 2, H / 2 + logoSize / 2 + 10);
+      const marginFactor = 0.86;
+      const finalScale = scale * marginFactor;
 
-  texture.needsUpdate = true;
-};
+      const drawWidth = logo.width * finalScale;
+      const drawHeight = logo.height * finalScale;
 
-const texture = new THREE.CanvasTexture(canvas);
-texture.colorSpace = THREE.SRGBColorSpace;
-texture.anisotropy = 8;
+      const x = (W - drawWidth) / 2;
+      const y = (H - drawHeight) / 2;
 
-// Correct orientation for THIS laptop model
-texture.center.set(0.5, 0.5);
-texture.rotation = Math.PI;
+      ctx.drawImage(logo, x, y, drawWidth, drawHeight);
 
-texture.needsUpdate = true;
-return texture;
+      texture.needsUpdate = true;
+    };
 
     return texture;
   }, []);
 
   return texture;
 }
-

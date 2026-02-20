@@ -8,7 +8,7 @@ Title: Laptop
 */
 
 import { useGLTF } from "@react-three/drei";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useScreenTexture } from "./useScreenTexture";
@@ -18,6 +18,29 @@ const Laptop = (props: any) => {
   const screenRef = useRef<THREE.Mesh>(null);
   const screenTexture = useScreenTexture();
 
+  useEffect(() => {
+    const geo = nodes.Screen_ComputerScreen_0.geometry;
+
+    geo.computeBoundingBox();
+    const box = geo.boundingBox;
+    if (!box) return;
+
+    const pos = geo.attributes.position;
+    const uv = [];
+
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i);
+      const y = pos.getY(i);
+
+      const u = (x - box.min.x) / (box.max.x - box.min.x);
+      const v = (y - box.min.y) / (box.max.y - box.min.y);
+
+      uv.push(u, v);
+    }
+
+    geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  }, []);
+
   useFrame(() => {
     if (!screenRef.current) return;
 
@@ -25,7 +48,7 @@ const Laptop = (props: any) => {
     mat.emissiveIntensity = THREE.MathUtils.lerp(
       mat.emissiveIntensity,
       props.zooming ? 1.4 : 0.6,
-      0.08
+      0.08,
     );
   });
 

@@ -8,11 +8,13 @@ import "./App.css";
 import { Contact } from "./pages/contact/contact";
 
 function App() {
-  const [entered, setEntered] = useState(false);
+  const isMobile = window.innerWidth < 1000;
+  const [entered, setEntered] = useState(false || isMobile);
+  
 
   return (
     <>
-      {!entered && (
+      {!entered &&  (
         <Canvas camera={{ position: [0, 3, 12], fov: 65 }}>
           <MainPage onEnter={() => setEntered(true)} />
         </Canvas>
